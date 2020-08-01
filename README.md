@@ -1,6 +1,6 @@
 # Trello Clone
 
-* [ ] Generate Server
+* [x] Generate Server
 * [ ] Generate Client
 * [ ] Add local auth to server
 * [ ] Add vuetify to client
