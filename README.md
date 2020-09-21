@@ -1,9 +1,9 @@
 # Trello Clone
 
 * [x] Generate Server
-* [ ] Generate Client
-* [ ] Add local auth to server
-* [ ] Add vuetify to client
+* [x] Generate Client
+* [x] Add local auth to server
+* [x] Add vuetify to client
 * [ ] Add feathers-vuex to client
 * [ ] Add login to client
 * [ ] Add boards service to server
