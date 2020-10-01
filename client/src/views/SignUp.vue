@@ -5,8 +5,10 @@
             <v-col cols="6">
                 <v-form
                     ref="form"
+                    v-if="!loading"
                     v-model="valid"
                     @submit.prevent = "signUp"
+                    @keydown.prevent.enter
                     lazy-validation
                 >
                     <v-text-field
@@ -47,8 +49,14 @@
                         label="Image Url"
                         required
                     ></v-text-field>
-                    <v-btn type= "submit" >SignUp</v-btn>
+                    <v-btn type= "submit" :disabled="!valid">SignUp</v-btn>
                 </v-form>
+                <v-progress-circular
+                    :size="70"
+                    :width="7"
+                    color="purple"
+                    indeterminate
+                ></v-progress-circular>
             </v-col>
         </v-row>
     </v-container>
@@ -57,6 +65,8 @@
 
 <script>
 /* eslint-disable */
+import { mapState } from 'vuex';
+
 export default {
     name: 'SignUp',
     data : (vm)=>({
@@ -85,9 +95,20 @@ export default {
         ]
 
     }),
+    computed: {
+        ...mapState('users', { loading: 'isCreatePending' }),
+    },
     methods: {
         signUp(){
-
+            if(this.valid){
+                const {User} = this.$FeathersVuex;
+                const user = new User(this.User);
+                user.save()
+                .then((user)=>{
+                    console.log(user);
+                    this.$router.push('/login');
+                });
+            }
         },
     }
 }
